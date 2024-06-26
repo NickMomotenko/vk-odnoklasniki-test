@@ -1,3 +1,8 @@
+:root {
+  --counterBg: #2FB675;
+  --playState: paused;
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;

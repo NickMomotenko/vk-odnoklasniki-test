@@ -1,14 +1,66 @@
 .counter {
-  background-color: #2fb675;
   height: 24px;
   width: 24px;
   border-radius: 50%;
   text-align: center;
+  box-sizing: content-box;
+
+  background: var(--counterBg);
+
+  position: relative;
+  z-index: 1;
 
   line-height: 24px;
 
   display: inline-block;
 
-  color: #fff;
-  font-size: 15px;
+  &__value {
+    font-size: 15px;
+    display: block;
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
+    border-radius: 999px;
+    background-color: var(--counterBg);
+
+    display: none;
+
+    animation: red-dot 2s linear infinite;
+  }
+
+  &:after {
+    animation-delay: 0.25s;
+  }
+
+  &--animation {
+    &:before,
+    &:after {
+      display: block;
+    }
+  }
+}
+
+@keyframes red-dot {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3);
+  }
 }
