@@ -1,0 +1,56 @@
+:root {
+  --buttonTextColor: rgb(255, 255, 255);
+  --buttonBgColor: rgb(255, 119, 0);
+}
+
+.button {
+  background: var(--buttonBgColor);
+  color: var(--buttonTextColor);
+  border-radius: 12px;
+  cursor: pointer;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.12;
+
+    transition-timing-function: cubic-bezier(0, -0.3, 0.5, 1.3);
+    transition-duration: 500ms;
+
+    background-color: rgba(255, 119, 0, 0.12);
+  }
+
+  &:hover {
+    background-color: rgba(var(--buttonTextColor), 0.12);
+  }
+
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &--load {
+    .button__content {
+      transition: 0.3s;
+      opacity: 0;
+      transform: translate(-15px, -3px);
+
+      visibility: hidden;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.loader {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+
+  transition: transform 0.3s;
+  transform: rotateY(-90deg) translate(7px, 7px);
+
+  &__img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+
+    animation: circle 3s 0.4s infinite linear;
+    animation-play-state: paused;
+  }
+
+  &--active {
+    transition: transform 0.3s;
+    transform: rotateY(0deg) translate(0px, 0px);
+
+    .loader__img {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

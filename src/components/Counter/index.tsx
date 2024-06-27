@@ -4,7 +4,7 @@ import "./styles.scss";
 import { sizes } from "./helper";
 
 type CounterProps = {
-  size?: 24 | 20 | 16 | 12 | 8;
+  size?: number;
   view?: "primary" | "secondary";
   stroke?: true | false;
   pulse?: true | false;
@@ -14,7 +14,7 @@ type CounterProps = {
 export const Counter: React.FC<CounterProps> = ({
   size = 12,
   view = "primary",
-  stroke = true,
+  stroke = false,
   pulse = true,
   children,
 }) => {
