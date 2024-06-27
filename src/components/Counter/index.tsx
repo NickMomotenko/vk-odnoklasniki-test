@@ -21,17 +21,11 @@ export const Counter: React.FC<CounterProps> = ({
 
   const isCounterValueHidden = size === 12 || size === 8;
 
-  const classes =
-    pulse && (size === 12 || size === 8)
-      ? "counter counter--animation"
-      : "counter";
-
   useEffect(() => {
     if (counterRef.current) {
       if (size) {
         counterRef.current.style.height = `${size}px`;
         counterRef.current.style.width = `${size}px`;
-        counterRef.current.style.lineHeight = `${size}px`;
 
         if (counterValueRef.current)
           counterValueRef.current.style.fontSize = `${sizes[size]?.fontSize}px`;
@@ -59,11 +53,15 @@ export const Counter: React.FC<CounterProps> = ({
       if (stroke) {
         counterRef.current.style.border = `${sizes[size]?.strokeWidth}px solid #fff`;
       }
+
+      if (pulse && (size === 12 || size === 8)) {
+        counterRef.current.classList.add("counter--animation");
+      } else counterRef.current.classList.remove("counter--animation");
     }
   }, [size, view, stroke]);
 
   return (
-    <div className={classes} ref={counterRef}>
+    <div className="counter" ref={counterRef}>
       {!isCounterValueHidden && (
         <span className="counter__value" ref={counterValueRef}>
           1
