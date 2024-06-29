@@ -95,6 +95,8 @@ export const Button: React.FC<ButtonVKProps> = ({
 
       if (isLoading) {
         setLoading(true);
+
+        
       } else setLoading(false);
     }
   }, [size, view, focused, isLoading]);

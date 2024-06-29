@@ -61,6 +61,9 @@ export const CounterPage = () => {
         <Counter view="secondary" stroke={true} size={20}>
           1
         </Counter>
+        <Counter view="secondary" stroke={true} size={12}>
+          1
+        </Counter>
         <Counter view="secondary" stroke={true} size={8}>
           1
         </Counter>

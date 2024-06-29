@@ -11,12 +11,17 @@
   transform: rotateY(-90deg) translate(7px, 7px);
 
   &__img {
+    animation: circle 3s 0.4s infinite linear;
+    animation-play-state: paused;
     height: 100%;
     width: 100%;
     object-fit: contain;
 
-    animation: circle 3s 0.4s infinite linear;
-    animation-play-state: paused;
+    svg {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
 
     * {
       fill: var(--loaderColor);
