@@ -1,7 +1,3 @@
-:root {
-  --counterBg: #2FB675;
-  --playState: paused;
-}
 
 * {
   box-sizing: border-box;

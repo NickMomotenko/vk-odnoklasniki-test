@@ -1,14 +1,12 @@
-import { Button } from "./components/Button";
-import { Counter } from "./components/Counter";
+// import { Button } from "./components/Button";
+import { ButtonPage } from "./pages/ButtonPage";
+import { CounterPage } from "./pages/CounterPage";
 
 export const App = () => {
   return (
     <div className="app">
-      <Counter size={16}>1</Counter>
-      <Counter size={16}>101</Counter>
-      <Button size={28} />
-      <Button size={36} />
-      <Button size={56} />
+      {/* <CounterPage /> */}
+      <ButtonPage />
     </div>
   );
 };

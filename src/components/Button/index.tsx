@@ -7,24 +7,31 @@ import { Counter } from "../Counter";
 import { Loader } from "../Loader";
 
 type ButtonVKProps = {
-  labelText: string;
+  labelText?: string;
   size?: 28 | 36 | 56;
   view?: "primary" | "secondary";
   stroke?: boolean;
-  pulse?: boolean;
   counter?: boolean;
+  disabled?: boolean;
+  focused?: boolean;
+  loading?: boolean;
 };
 
 export const Button: React.FC<ButtonVKProps> = ({
   labelText = "Что делать",
   counter = false,
-  size = 28,
+  size = 36,
   view = "primary",
+  disabled = false,
+  focused = false,
+  loading = false,
 }) => {
-  const [load, setLoad] = useState(false);
+  const [isLoading, setLoading] = useState(loading ? loading : false);
 
   const buttonRef = useRef<any>();
   const buttonContentRef = useRef<any>();
+
+  const counterRef = useRef<any>();
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -44,6 +51,17 @@ export const Button: React.FC<ButtonVKProps> = ({
             "--buttonTextColor",
             "rgb(255, 255, 255)"
           );
+          buttonRef.current.style.setProperty(
+            "--buttonHoverBgColor",
+            "rgba(255, 255, 255, 0.12)"
+          );
+
+          if (counterRef.current) {
+            counterRef.current.style.setProperty(
+              "--counterBg",
+              "rgba(255, 255, 255, 0.12)"
+            );
+          }
         }
 
         if (view === "secondary") {
@@ -55,25 +73,42 @@ export const Button: React.FC<ButtonVKProps> = ({
             "--buttonTextColor",
             "rgb(46, 47, 51)"
           );
+          buttonRef.current.style.setProperty(
+            "--buttonHoverBgColor",
+            "rgba(46, 47, 51, 0.12)"
+          );
         }
       }
+
+      if (focused) {
+        buttonRef.current.focus();
+      }
+
+      if (isLoading) {
+        setLoading(true);
+      } else setLoading(false);
     }
-  }, [size, view]);
+  }, [size, view, focused, isLoading]);
 
   useEffect(() => {
     if (buttonRef.current) {
-      if (load) {
-        buttonRef.current.classList.add("button--load");
+      if (isLoading) {
+        buttonRef.current.classList.add("button--loading");
       }
     }
-  }, [load]);
+  }, [isLoading]);
+
+  const handleClick = () => {
+    setLoading(true);
+  };
 
   return (
     <button
       className="button"
       type="button"
       ref={buttonRef}
-      onClick={() => setLoad(true)}
+      onClick={handleClick}
+      disabled={disabled}
     >
       <div className="button__content" ref={buttonContentRef}>
         {labelText && <span className="button__label">{labelText}</span>}
@@ -82,7 +117,11 @@ export const Button: React.FC<ButtonVKProps> = ({
             className="button__counter"
             style={{ marginLeft: `${sizes[size]?.loaderPadding}px` }}
           >
-            <Counter size={sizes[size]?.loaderSize} view={view}>
+            <Counter
+              size={sizes[size]?.loaderSize}
+              view={view}
+              ref={counterRef}
+            >
               2
             </Counter>
           </div>
@@ -90,7 +129,7 @@ export const Button: React.FC<ButtonVKProps> = ({
       </div>
 
       <div className="button__loader">
-        <Loader isActive={load} size={sizes[size]?.loaderSize} />
+        <Loader isActive={isLoading} size={sizes[size]?.loaderSize} />
       </div>
     </button>
   );
