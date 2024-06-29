@@ -31,7 +31,9 @@ export const ButtonPage = () => {
       </Div>
       <Separator />
 
-      <Text weight="1">Focused (работает по tab на клавиатуре и по наличию пропс)</Text>
+      <Text weight="1">
+        Focused (работает по tab на клавиатуре и по наличию пропс)
+      </Text>
       <Div style={{ display: "flex", alignItems: "center" }}>
         <Button view="primary" size={28} />
         <Button view="secondary" size={36} />
@@ -53,9 +55,28 @@ export const ButtonPage = () => {
       </Div>
       <Separator />
 
+      <Text weight="1">Лоадер</Text>
+      <Div style={{ display: "flex", alignItems: "center" }}>
+        <Button view="primary" size={28} labelText="Enabled" loading />
+        <Button view="primary" size={36} labelText="Enabled" loading />
+        <Button view="primary" size={56} labelText="Enabled" loading />
+      </Div>
+      <Div style={{ display: "flex", alignItems: "center" }}>
+        <Button view="secondary" size={28} labelText="Enabled" loading />
+        <Button view="secondary" size={36} labelText="Enabled" loading />
+        <Button view="secondary" size={56} labelText="Enabled" loading />
+      </Div>
+
+      <Separator />
+
       <Text weight="1">Текс не помещается....</Text>
-      <Div style={{ display: "flex", alignItems: "center" , maxWidth:"250px" }}>
-        <Button view="primary" size={28} labelText="Текста слишком много , караул, что делать" counter />
+      <Div style={{ display: "flex", alignItems: "center", maxWidth: "250px" }}>
+        <Button
+          view="primary"
+          size={28}
+          labelText="Текста слишком много , караул, что делать"
+          counter
+        />
       </Div>
       <Separator />
     </div>
