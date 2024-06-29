@@ -1,3 +1,7 @@
+:root {
+  --loaderColor: #fff;
+}
+
 .loader {
   display: inline-block;
   height: 24px;
@@ -13,6 +17,10 @@
 
     animation: circle 3s 0.4s infinite linear;
     animation-play-state: paused;
+
+    * {
+      fill: var(--loaderColor);
+    }
   }
 
   &--active {

@@ -32,6 +32,7 @@ export const Button: React.FC<ButtonVKProps> = ({
   const buttonContentRef = useRef<any>();
 
   const counterRef = useRef<any>();
+  const loaderRef = useRef<any>();
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -62,6 +63,10 @@ export const Button: React.FC<ButtonVKProps> = ({
               "rgba(255, 255, 255, 0.12)"
             );
           }
+
+          if (loaderRef.current) {
+            loaderRef.current.style.setProperty("--loaderColor", "#fff");
+          }
         }
 
         if (view === "secondary") {
@@ -77,6 +82,10 @@ export const Button: React.FC<ButtonVKProps> = ({
             "--buttonHoverBgColor",
             "rgba(46, 47, 51, 0.12)"
           );
+
+          if (loaderRef.current) {
+            loaderRef.current.style.setProperty("--loaderColor", "#000");
+          }
         }
       }
 
@@ -129,7 +138,11 @@ export const Button: React.FC<ButtonVKProps> = ({
       </div>
 
       <div className="button__loader">
-        <Loader isActive={isLoading} size={sizes[size]?.loaderSize} />
+        <Loader
+          isActive={isLoading}
+          size={sizes[size]?.loaderSize}
+          ref={loaderRef}
+        />
       </div>
     </button>
   );
