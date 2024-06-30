@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-Demo - 
+Demo - https://vk-odnoklasniki-test.netlify.app/
 
 Setup instruction:
 1. npm i / yarn
