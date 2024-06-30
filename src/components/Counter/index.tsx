@@ -69,7 +69,7 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
         }
 
         if (stroke) {
-          counterRef.current.style.outline = `${sizes[size]?.strokeWidth}px solid #fff`;
+          counterRef.current.style.outline = `${sizes[size]?.strokeWidth}px solid`;
         }
 
         if (pulse && (size === 12 || size === 8)) {

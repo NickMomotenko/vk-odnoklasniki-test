@@ -19,6 +19,8 @@
   align-items: center;
   justify-content: center;
 
+  outline-color: var(--counterOutlineColor) !important;
+
   &__value {
     font-size: 15px;
     display: inline-block;
