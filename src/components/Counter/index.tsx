@@ -1,9 +1,11 @@
 import { forwardRef, useEffect, useRef } from "react";
 
-import "./styles.scss";
 import { sizes } from "./helper";
 
+import "./styles.scss";
+
 type CounterProps = {
+  value?: number | string;
   size?: number;
   view?: "primary" | "secondary";
   stroke?: true | false;
@@ -13,7 +15,7 @@ type CounterProps = {
 
 export const Counter = forwardRef<HTMLDivElement, CounterProps>(
   (
-    { size = 24, view = "primary", stroke = false, pulse = false, children },
+    { value, size = 24, view = "primary", stroke = false, pulse = false },
     ref
   ) => {
     const internalRef = useRef<HTMLDivElement>(null);
@@ -21,7 +23,7 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
     const counterValueRef = useRef<any>();
 
     const isCounterValueHidden = size === 12 || size === 8;
-    const isSingleSymbol = children && children.length === 1;
+    const isSingleSymbol = value && value.toString().length === 1;
 
     useEffect(() => {
       if (counterRef.current) {
@@ -46,7 +48,10 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
             counterRef.current.style.setProperty("--counterBg", "#2fb675");
 
             if (counterValueRef.current)
-              counterValueRef.current.style.color = "#fff";
+              counterValueRef.current.style.setProperty(
+                "--counterTextColor",
+                "#fff"
+              );
           }
 
           if (view === "secondary") {
@@ -56,7 +61,10 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
             );
 
             if (counterValueRef.current)
-              counterValueRef.current.style.color = "#2E2F33";
+              counterValueRef.current.style.setProperty(
+                "--counterTextColor",
+                "#2E2F33"
+              );
           }
         }
 
@@ -68,14 +76,14 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
           counterRef.current.classList.add("counter--animation");
         } else counterRef.current.classList.remove("counter--animation");
       }
-    }, [size, view, stroke, children]);
+    }, [size, view, stroke, value]);
 
     return (
       <div className="counter" ref={counterRef}>
         {!isCounterValueHidden && (
           <span className="counter__value" ref={counterValueRef}>
-            {isSingleSymbol && children}
-            {children > 99 && "99+"}
+            {isSingleSymbol && value}
+            {value > 99 && "99+"}
           </span>
         )}
       </div>

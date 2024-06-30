@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import { ButtonPage } from "./pages/ButtonPage";
 import { CounterPage } from "./pages/CounterPage";
+
 import { Navigation } from "./components/Navigation";
 
 export const App = () => {

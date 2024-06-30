@@ -2,7 +2,6 @@
   --counterBg: #2fb675;
   --counterTextColor: #fff;
   --counterOutlineColor: #fff;
-  --playState: paused;
 }
 
 .counter {
@@ -23,6 +22,7 @@
   &__value {
     font-size: 15px;
     display: inline-block;
+    color: var(--counterTextColor);
   }
 
   &:before,

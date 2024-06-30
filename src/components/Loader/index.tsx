@@ -1,9 +1,10 @@
 import { forwardRef, useEffect, useRef } from "react";
 
-import test from "../../assets/loader.svg";
+import { ReactSVG } from "react-svg";
+
+import loaderIcon from "../../assets/loader.svg";
 
 import "./styles.scss";
-import { ReactSVG } from "react-svg";
 
 type LoaderProps = {
   size?: number;
@@ -32,7 +33,7 @@ export const Loader: React.FC<LoaderProps> = forwardRef<
 
   return (
     <div className="loader" ref={loaderRef}>
-      <ReactSVG src={test} className="loader__img" />
+      <ReactSVG src={loaderIcon} className="loader__img" />
     </div>
   );
 });

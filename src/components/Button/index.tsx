@@ -8,6 +8,7 @@ import { Loader } from "../Loader";
 
 type ButtonVKProps = {
   labelText?: string;
+  counterValue?: string | number;
   size?: 28 | 36 | 56;
   view?: "primary" | "secondary";
   stroke?: boolean;
@@ -20,6 +21,7 @@ type ButtonVKProps = {
 export const Button: React.FC<ButtonVKProps> = ({
   labelText = "Что делать",
   counter = false,
+  counterValue = 2,
   size = 36,
   view = "primary",
   disabled = false,
@@ -28,11 +30,11 @@ export const Button: React.FC<ButtonVKProps> = ({
 }) => {
   const [isLoading, setLoading] = useState(loading ? loading : false);
 
-  const buttonRef = useRef<any>();
-  const buttonContentRef = useRef<any>();
+  const buttonRef = useRef<HTMLButtonElement>();
+  const buttonContentRef = useRef<HTMLDivElement>();
 
-  const counterRef = useRef<any>();
-  const loaderRef = useRef<any>();
+  const counterRef = useRef<HTMLDivElement>();
+  const loaderRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -92,19 +94,17 @@ export const Button: React.FC<ButtonVKProps> = ({
       if (focused) {
         buttonRef.current.focus();
       }
-
-      if (isLoading) {
-        setLoading(true);
-
-        
-      } else setLoading(false);
     }
-  }, [size, view, focused, isLoading]);
+  }, [size, view, focused]);
 
   useEffect(() => {
     if (buttonRef.current) {
       if (isLoading) {
+        setLoading(true);
         buttonRef.current.classList.add("button--loading");
+      } else {
+        setLoading(false);
+        buttonRef.current.classList.remove("button--loading");
       }
     }
   }, [isLoading]);
@@ -129,16 +129,14 @@ export const Button: React.FC<ButtonVKProps> = ({
             style={{ marginLeft: `${sizes[size]?.loaderPadding}px` }}
           >
             <Counter
+              value={counterValue}
               size={sizes[size]?.loaderSize}
               view={view}
               ref={counterRef}
-            >
-              2
-            </Counter>
+            />
           </div>
         )}
       </div>
-
       <div className="button__loader">
         <Loader
           isActive={isLoading}

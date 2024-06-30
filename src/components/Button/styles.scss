@@ -74,7 +74,7 @@
     overflow: hidden;
   }
 
-  &:focus {
+  &:focus-visible {
     border-color: #fff;
     outline: 3px solid blue;
   }

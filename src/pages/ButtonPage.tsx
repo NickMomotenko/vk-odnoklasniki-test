@@ -32,7 +32,7 @@ export const ButtonPage = () => {
       <Separator />
 
       <Text weight="1">
-        Focused (работает по tab на клавиатуре и по наличию пропс)
+        Focused (работает по tab на клавиатуре)
       </Text>
       <Div style={{ display: "flex", alignItems: "center" }}>
         <Button view="primary" size={28} />
@@ -44,13 +44,11 @@ export const ButtonPage = () => {
       <Div style={{ display: "flex", alignItems: "center" }}>
         <Button view="primary" size={28} labelText="Enabled" />
         <Button view="primary" size={28} labelText="Disabled" disabled />
-        <Button view="primary" size={28} labelText="Focused" focused />
         <Button view="primary" size={28} labelText="Loading" loading />
       </Div>
       <Div>
         <Button view="secondary" size={28} labelText="Enabled" />
         <Button view="secondary" size={28} labelText="Disabled" disabled />
-        <Button view="secondary" size={28} labelText="Focused" focused />
         <Button view="secondary" size={28} labelText="Loading" loading />
       </Div>
       <Separator />
@@ -69,7 +67,7 @@ export const ButtonPage = () => {
 
       <Separator />
 
-      <Text weight="1">Текс не помещается....</Text>
+      <Text weight="1">Текст не помещается....</Text>
       <Div style={{ display: "flex", alignItems: "center", maxWidth: "250px" }}>
         <Button
           view="primary"
