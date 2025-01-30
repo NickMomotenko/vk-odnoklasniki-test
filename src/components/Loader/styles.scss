@@ -10,6 +10,8 @@
   transition: transform 0.3s;
   transform: rotateY(-90deg) translate(7px, 7px);
 
+  visibility: hidden;
+
   &__img {
     animation: circle 3s 0.4s infinite linear;
     animation-play-state: paused;
@@ -29,6 +31,7 @@
   }
 
   &--active {
+    visibility: visible;
     transition: transform 0.3s;
     transform: rotateY(0deg) translate(0px, 0px);
 

@@ -1,116 +1,53 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-import { sizes } from "./helper";
-
-import "./styles.scss";
-import { Counter } from "../Counter";
 import { Loader } from "../Loader";
 
-type ButtonVKProps = {
-  labelText?: string;
-  counterValue?: string | number;
-  size?: 28 | 36 | 56;
-  view?: "primary" | "secondary";
-  stroke?: boolean;
-  counter?: boolean;
-  disabled?: boolean;
-  focused?: boolean;
-  loading?: boolean;
-};
+import { useButton } from "../../hooks/useButton";
 
-export const Button: React.FC<ButtonVKProps> = ({
+import { ButtonProps } from "./types";
+
+import "./styles.scss";
+import { sizes } from "./helper";
+import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
+
+export const Button: React.FC<ButtonProps> = ({
   labelText = "Что делать",
-  counter = false,
-  counterValue = 2,
   size = 36,
   view = "primary",
   disabled = false,
   focused = false,
-  loading = false,
+  children,
 }) => {
-  const [isLoading, setLoading] = useState(loading ? loading : false);
+  const {
+    buttonRef,
+    buttonContentRef,
+    setButtonSize,
+    setButtonView,
+    setFocused,
+  } = useButton({ size, view });
 
-  const buttonRef = useRef<HTMLButtonElement>();
-  const buttonContentRef = useRef<HTMLDivElement>();
+  const { isLoading, setIsloading } = useButtonWithCounterContext();
 
-  const counterRef = useRef<HTMLDivElement>();
   const loaderRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
     if (buttonRef.current) {
-      if (size) {
-        buttonRef.current.style.padding = `${sizes[size]?.verPadding}px ${sizes[size]?.horPadding}px`;
-        buttonRef.current.style.height = `${size}px`;
-        buttonRef.current.style.fontSize = `${sizes[size]?.fontSize}px`;
-      }
-
-      if (view) {
-        if (view === "primary") {
-          buttonRef.current.style.setProperty(
-            "--buttonBgColor",
-            "rgb(255, 119, 0)"
-          );
-          buttonRef.current.style.setProperty(
-            "--buttonTextColor",
-            "rgb(255, 255, 255)"
-          );
-          buttonRef.current.style.setProperty(
-            "--buttonHoverBgColor",
-            "rgba(255, 255, 255, 0.12)"
-          );
-
-          if (counterRef.current) {
-            counterRef.current.style.setProperty(
-              "--counterBg",
-              "rgba(255, 255, 255, 0.12)"
-            );
-          }
-
-          if (loaderRef.current) {
-            loaderRef.current.style.setProperty("--loaderColor", "#fff");
-          }
-        }
-
-        if (view === "secondary") {
-          buttonRef.current.style.setProperty(
-            "--buttonBgColor",
-            "rgba(103,102,86,.12)"
-          );
-          buttonRef.current.style.setProperty(
-            "--buttonTextColor",
-            "rgb(46, 47, 51)"
-          );
-          buttonRef.current.style.setProperty(
-            "--buttonHoverBgColor",
-            "rgba(46, 47, 51, 0.12)"
-          );
-
-          if (loaderRef.current) {
-            loaderRef.current.style.setProperty("--loaderColor", "#000");
-          }
-        }
-      }
-
-      if (focused) {
-        buttonRef.current.focus();
-      }
+      setButtonSize();
+      setButtonView();
+      setFocused();
     }
   }, [size, view, focused]);
 
   useEffect(() => {
     if (buttonRef.current) {
       if (isLoading) {
-        setLoading(true);
         buttonRef.current.classList.add("button--loading");
-      } else {
-        setLoading(false);
-        buttonRef.current.classList.remove("button--loading");
       }
     }
   }, [isLoading]);
 
   const handleClick = () => {
-    setLoading(true);
+    setIsloading(true);
   };
 
   return (
@@ -123,23 +60,21 @@ export const Button: React.FC<ButtonVKProps> = ({
     >
       <div className="button__content" ref={buttonContentRef}>
         {labelText && <span className="button__label">{labelText}</span>}
-        {counter && (
+        {children && (
           <div
             className="button__counter"
             style={{ marginLeft: `${sizes[size]?.loaderPadding}px` }}
           >
-            <Counter
-              value={counterValue}
-              size={sizes[size]?.loaderSize}
-              view={view}
-            />
+            {children}
           </div>
         )}
       </div>
+      {/* <div className="button__shimmer"></div> */}
       <div className="button__loader">
         <Loader
           isActive={isLoading}
           size={sizes[size]?.loaderSize}
+          view={view}
           ref={loaderRef}
         />
       </div>

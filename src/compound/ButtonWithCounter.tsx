@@ -1,22 +1,33 @@
-import { createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 import { Button } from "../components/Button";
 import { Counter } from "./../components/Counter/index";
 
 type ButtonWithCounterContext = {
-  children: React.ReactNode;
+  isLoading?: boolean;
+  setIsloading?: any;
 };
 
 const ButtonWithCounterContext = createContext<
   ButtonWithCounterContext | undefined
 >(undefined);
 
-export const ButtonWithCounter = ({ children }) => {
+export const ButtonWithCounter = ({ children }: any) => {
+  const [isLoading, setIsloading] = useState(false);
+
   return (
-    <ButtonWithCounterContext.Provider value={{}}>
+    <ButtonWithCounterContext.Provider value={{ isLoading, setIsloading }}>
       {children}
     </ButtonWithCounterContext.Provider>
   );
+};
+
+export const useButtonWithCounterContext = () => {
+  const context = useContext(ButtonWithCounterContext);
+
+  if (!context) return;
+
+  return context;
 };
 
 ButtonWithCounter.Button = Button;

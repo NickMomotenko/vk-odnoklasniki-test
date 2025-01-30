@@ -1,14 +1,13 @@
 :root {
-  --buttonTextColor: rgb(255, 255, 255);
-  --buttonBgColor: rgb(255, 119, 0);
   --buttonHoverBgColor: rgba(255, 255, 255, 0.12);
 }
 
 .button {
-  background: var(--buttonBgColor);
-  color: var(--buttonTextColor);
+  background: rgb(255, 119, 0);
+  color: #fff;
   border-radius: 12px;
   cursor: pointer;
+  overflow: hidden;
 
   font-family: "Roboto", sans-serif;
   font-size: 17px;
@@ -17,19 +16,19 @@
 
   max-width: 100%;
 
-  border: 2px solid transparent;
+  outline: 2px solid #fff;
 
   &:before {
     content: "";
     display: block;
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 12px;
-    opacity: 0.36;
-    z-index: 2;
+    opacity: 1;
+    z-index: 5;
 
     transition: background 0.4s;
     background: var(--buttonHoverBgColor);
@@ -41,6 +40,11 @@
       visibility: visible;
       opacity: 1;
     }
+
+    .button__content {
+      transition: transform 0.4s;
+      transform: scale(1.05);
+    }
   }
 
   &:disabled {
@@ -48,6 +52,10 @@
     opacity: 0.36;
 
     &:hover {
+      .button__content {
+        transform: none;
+      }
+
       &:before {
         visibility: hidden;
       }
@@ -74,6 +82,31 @@
     overflow: hidden;
   }
 
+  &__shimmer {
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    bottom: -2px;
+    width: calc(100%);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5) 50.329%,
+      rgba(255, 255, 255, 0) 100%
+    );
+
+    // background: linear-gradient(
+    //   90deg,
+    //   rgba(46, 47, 51, 0),
+    //   rgba(46, 47, 51, 0.12) 50.329%,
+    //   rgba(46, 47, 51, 0) 100%
+    // );
+
+    // transform: translateX(-100%);
+
+    // animation: test 1s linear infinite forwards;
+  }
+
   &:focus-visible {
     border-color: #fff;
     outline: 3px solid blue;
@@ -87,5 +120,17 @@
 
       visibility: hidden;
     }
+  }
+}
+
+@keyframes test {
+  0% {
+    transform: translateX(-100%);
+  }
+  99% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%); /* Вернуться в начальное положение */
   }
 }
