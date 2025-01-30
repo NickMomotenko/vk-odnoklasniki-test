@@ -1,16 +1,8 @@
-:root {
-  --counterBg: #2fb675;
-  --counterTextColor: #fff;
-  --counterOutlineColor: #fff;
-}
-
 .counter {
-  height: 24px;
-  width: 24px;
   border-radius: 50%;
   text-align: center;
 
-  background: var(--counterBg);
+  background: #2fb675;
 
   position: relative;
   z-index: 1;
@@ -19,12 +11,12 @@
   align-items: center;
   justify-content: center;
 
-  outline-color: var(--counterOutlineColor) !important;
+  outline-color: #fff !important;
 
   &__value {
     font-size: 15px;
     display: inline-block;
-    color: var(--counterTextColor);
+    color: #fff;
   }
 
   &:before,
@@ -38,7 +30,7 @@
     height: 100%;
     width: 100%;
     border-radius: 999px;
-    background-color: var(--counterBg);
+    background-color: #2fb675;
 
     display: none;
 

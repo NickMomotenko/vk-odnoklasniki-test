@@ -23,3 +23,8 @@ export const sizes = {
     strokeWidth: 1,
   },
 };
+
+
+export const setCounterAnimation = () => {
+
+}

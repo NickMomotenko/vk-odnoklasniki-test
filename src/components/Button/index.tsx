@@ -132,7 +132,6 @@ export const Button: React.FC<ButtonVKProps> = ({
               value={counterValue}
               size={sizes[size]?.loaderSize}
               view={view}
-              ref={counterRef}
             />
           </div>
         )}
