@@ -17,11 +17,12 @@ export const Button: React.FC<ButtonProps> = ({
   disabled = false,
   focused = false,
   counter = true,
+  loading = false,
   children,
 }) => {
   const context = useButtonWithCounterContext();
   const [isLoading, setIsloading] = useState(
-    context?.isLoading ? context?.isLoading : false
+    context?.isLoading ? context?.isLoading : loading
   );
 
   const {

@@ -1,11 +1,11 @@
 import { forwardRef, useEffect } from "react";
 
 import { useCounter } from "../../hooks/useCounter";
+import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
 
 import { CounterProps } from "./types";
 
 import "./styles.scss";
-import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
 
 export const Counter = forwardRef<HTMLDivElement, CounterProps>(
   ({

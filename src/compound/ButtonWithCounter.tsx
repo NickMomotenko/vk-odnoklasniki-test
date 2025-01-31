@@ -13,9 +13,9 @@ const ButtonWithCounterContext = createContext<
   ButtonWithCounterContext | undefined
 >(undefined);
 
-export const ButtonWithCounter = ({ children, ...rest }: any) => {
+export const ButtonWithCounter = ({ children, value, ...rest }: any) => {
   const [isLoading, setIsloading] = useState(false);
-  const [counterValue, setCounterValue] = useState(1);
+  const [counterValue, setCounterValue] = useState(value ?? 1);
 
   return (
     <ButtonWithCounterContext.Provider

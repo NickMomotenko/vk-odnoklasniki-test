@@ -55,7 +55,7 @@ export const useButton = ({ size, view }: CounterProps) => {
   };
 
   const setFocused = () => {
-    // buttonRef.current.focus();
+    buttonRef.current.focus();
   };
 
   return {

@@ -1,16 +1,15 @@
-import { ButtonWithCounter } from "./compound/ButtonWithCounter";
-
 import { Button } from "./components/Button";
 import { Counter } from "./components/Counter";
+import { ButtonWithCounter } from "./compound/ButtonWithCounter";
 
 export const App = () => {
   return (
     <div className="app">
-      {/* <ButtonWithCounter view="secondary" size={28}>
+      <ButtonWithCounter size={28}>
         <Button>
           <Counter />
         </Button>
-      </ButtonWithCounter> */}
+      </ButtonWithCounter>
       {/* <Counter size={24} />
       <Counter size={20} />
       <Counter size={16} />
@@ -21,9 +20,6 @@ export const App = () => {
       <Counter value={111} />
       <Counter pulse size={12} />
       <Counter view="secondary" size={12} pulse /> */}
-      <Button />
-      <Button size={28} />
-      <Button size={56} view="secondary" />
     </div>
   );
 };

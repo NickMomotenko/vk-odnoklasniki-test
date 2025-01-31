@@ -43,6 +43,8 @@ export const useCounter = ({
       buttonView &&
       (buttonView === "primary" || buttonView === "secondary")
     ) {
+      console.log(buttonView);
+      
       if (buttonView === "primary") {
         counterBody.current.style.background = "rgba(255, 255, 255, 0.12)";
 
@@ -77,8 +79,9 @@ export const useCounter = ({
 
   const setCounterStroke = () => {
     if (stroke) {
-      counterBody.current.style.outline = `${sizes[size]?.strokeWidth}px solid`;
-    }
+      counterBody.current.style.outline = `${sizes[size]?.strokeWidth}px #fff solid`;
+    } else
+      counterBody.current.style.outline = `${sizes[size]?.strokeWidth}px transparent solid`;
   };
 
   const setCounterAnimation = () => {
