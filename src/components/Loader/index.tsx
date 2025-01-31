@@ -5,44 +5,41 @@ import { ReactSVG } from "react-svg";
 import loaderIcon from "../../assets/loader.svg";
 
 import "./styles.scss";
+import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
+import { useLoaderStyles } from "../../hooks/useLoaderStyles";
 
 type LoaderProps = {
   size?: number;
-  isActive?: boolean;
+  isLoading?: boolean;
   view?: string;
 };
 
 export const Loader: React.FC<LoaderProps> = forwardRef<
   HTMLDivElement,
   LoaderProps
->(({ size, isActive, view }, ref) => {
-  const internalRef = useRef<HTMLDivElement>(null);
-  const loaderRef = ref || internalRef;
+>(({ size, isLoading }) => {
+  const context = useButtonWithCounterContext();
+
+  const { loaderRef, setLoaderSize, setLoaderView } = useLoaderStyles({
+    size,
+    view: context?.view,
+  });
 
   useEffect(() => {
-    if (loaderRef.current) {
-      loaderRef.current.style.height = `${size}px`;
-      loaderRef.current.style.width = `${size}px`;
-    }
+    setLoaderSize();
   }, [size]);
 
   useEffect(() => {
     setTimeout(() => {
-      if (isActive) {
+      if (isLoading) {
         loaderRef.current.classList.add("loader--active");
       } else loaderRef.current.classList.remove("loader--active");
     }, 100);
-  }, [isActive]);
+  }, [isLoading]);
 
   useEffect(() => {
-    if (loaderRef.current) {
-      if (view === "primary")
-        loaderRef.current.style.setProperty("--loaderColor", "#fff");
-   
-      if(view === 'secondary')
-        loaderRef.current.style.setProperty("--loaderColor", "#2E2F33");
-    }
-  }, [view]);
+    setLoaderView();
+  }, [context?.view]);
 
   return (
     <div className="loader" ref={loaderRef}>

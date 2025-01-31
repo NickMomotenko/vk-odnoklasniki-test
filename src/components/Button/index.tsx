@@ -16,6 +16,7 @@ export const Button: React.FC<ButtonProps> = ({
   view = "primary",
   disabled = false,
   focused = false,
+  counter = true,
   children,
 }) => {
   const context = useButtonWithCounterContext();
@@ -31,11 +32,9 @@ export const Button: React.FC<ButtonProps> = ({
     setFocused,
   } = useButton({ size, view });
 
-  const loaderRef = useRef<HTMLDivElement>();
-
   useEffect(() => {
     if (buttonRef.current) {
-      setButtonSize();
+      setButtonSize({ buttonSize: context?.size });
       setButtonView(context?.view);
       setFocused();
     }
@@ -63,7 +62,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       <div className="button__content" ref={buttonContentRef}>
         {labelText && <span className="button__label">{labelText}</span>}
-        {children && (
+        {children && counter && (
           <div
             className="button__counter"
             style={{ marginLeft: `${sizes[size]?.loaderPadding}px` }}
@@ -72,13 +71,16 @@ export const Button: React.FC<ButtonProps> = ({
           </div>
         )}
       </div>
-      {/* <div className="button__shimmer"></div> */}
+      {isLoading && <div className="button__shimmer"></div>}
+
       <div className="button__loader">
         <Loader
-          isActive={isLoading}
-          size={sizes[size]?.loaderSize}
-          view={view}
-          ref={loaderRef}
+          isLoading={isLoading}
+          size={
+            context?.size
+              ? sizes[context?.size]?.loaderSize
+              : sizes[size]?.loaderSize
+          }
         />
       </div>
     </button>

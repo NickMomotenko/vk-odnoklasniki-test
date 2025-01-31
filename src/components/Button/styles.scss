@@ -1,5 +1,11 @@
 :root {
   --buttonHoverBgColor: rgba(255, 255, 255, 0.12);
+  --shimmerColor: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.5) 50.329%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .button {
@@ -84,27 +90,13 @@
 
   &__shimmer {
     position: absolute;
-    left: -2px;
-    top: -2px;
-    bottom: -2px;
+    left: 0;
+    top: 0;
+    bottom: 0;
     width: calc(100%);
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0.5) 50.329%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: var(--shimmerColor);
 
-    // background: linear-gradient(
-    //   90deg,
-    //   rgba(46, 47, 51, 0),
-    //   rgba(46, 47, 51, 0.12) 50.329%,
-    //   rgba(46, 47, 51, 0) 100%
-    // );
-
-    // transform: translateX(-100%);
-
-    // animation: test 1s linear infinite forwards;
+    animation: test 1s linear infinite forwards;
   }
 
   &:focus-visible {
@@ -127,10 +119,7 @@
   0% {
     transform: translateX(-100%);
   }
-  99% {
-    transform: translateX(100%);
-  }
   100% {
-    transform: translateX(-100%); /* Вернуться в начальное положение */
+    transform: translateX(100%);
   }
 }

@@ -7,7 +7,9 @@ export const useButton = ({ size, view }: CounterProps) => {
   const buttonRef = useRef<HTMLButtonElement | any>();
   const buttonContentRef = useRef<HTMLDivElement | any>();
 
-  const setButtonSize = () => {
+  const setButtonSize = ({ buttonSize }: any) => {
+    size = buttonSize ? buttonSize : size;
+
     if (sizes[size]) {
       Object.assign(buttonRef.current.style, {
         padding: `${sizes[size]?.verPadding}px ${sizes[size]?.horPadding}px`,
@@ -26,11 +28,14 @@ export const useButton = ({ size, view }: CounterProps) => {
         background: "rgb(255, 119, 0)",
         color: `#fff`,
       });
-
-      // buttonRef.current.style.setProperty(
-      //   "--buttonHoverBgColor",
-      //   "rgba(255, 255, 255, 0.12)"
-      // );
+      buttonRef.current.style.setProperty(
+        "--buttonHoverBgColor",
+        "rgba(255, 255, 255, 0.12)"
+      );
+      buttonRef.current.style.setProperty(
+        "--shimmerColor",
+        "linear-gradient(90.00deg, rgba(46, 47, 51, 0), rgba(46, 47, 51, 0.08) 50.329%, rgba(46, 47, 51, 0) 100%)"
+      );
     }
 
     if (view === "secondary") {
@@ -41,6 +46,10 @@ export const useButton = ({ size, view }: CounterProps) => {
       buttonRef.current.style.setProperty(
         "--buttonHoverBgColor",
         "rgba(46, 47, 51, 0.12)"
+      );
+      buttonRef.current.style.setProperty(
+        "--shimmerColor",
+        "linear-gradient(90.00deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50.329%, rgba(255, 255, 255, 0) 100%)"
       );
     }
   };

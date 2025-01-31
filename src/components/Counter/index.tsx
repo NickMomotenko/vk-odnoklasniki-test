@@ -17,9 +17,6 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
   }) => {
     const context = useButtonWithCounterContext();
 
-    console.log(context);
-    
-
     const {
       counterBody,
       counterValue,
@@ -29,23 +26,36 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
       setCounterView,
       setCounterStroke,
       setCounterAnimation,
-    } = useCounter({ value, size, view, stroke, pulse });
+    } = useCounter({
+      value: context?.counterValue ? context?.counterValue : value,
+      size,
+      view,
+      stroke,
+      pulse,
+    });
 
     useEffect(() => {
       if (counterBody.current) {
-        setCounterSize();
-        setCounterView(context?.view);
+        setCounterSize({ buttonSize: context?.size });
+        setCounterView({ buttonView: context?.view });
         setCounterStroke();
         setCounterAnimation();
       }
-    }, [size, view, stroke, value]);
+    }, [
+      size,
+      view,
+      stroke,
+      context?.counterValue ? context?.counterValue : value,
+    ]);
+
+    let renderedValue = context?.counterValue ? context?.counterValue : value;
 
     return (
       <div className="counter" ref={counterBody}>
         {!isCounterValueHidden && (
           <span className="counter__value" ref={counterValue}>
-            {isSingleSymbol && value}
-            {Number(value) > 99 && "99+"}
+            {isSingleSymbol && renderedValue}
+            {Number(renderedValue) > 99 && "99+"}
           </span>
         )}
       </div>

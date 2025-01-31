@@ -5,6 +5,7 @@ export const sizes = {
     fontSize:13,
     loaderSize: 16,
     loaderPadding: 4,
+    counterSize: 16
   },
   36: {
     horPadding: 12,
@@ -12,6 +13,7 @@ export const sizes = {
     fontSize:15,
     loaderSize: 20,
     loaderPadding: 6,
+    counterSize: 20
   },
   56: {
     horPadding: 16,
@@ -19,5 +21,6 @@ export const sizes = {
     fontSize:17,
     loaderSize: 24,
     loaderPadding: 8,
+    counterSize: 24
   },
 };
