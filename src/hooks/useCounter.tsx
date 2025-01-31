@@ -35,17 +35,29 @@ export const useCounter = ({
     }
   };
 
-  const setCounterView = () => {
-    if (view) {
-      if (view === "primary") {
-        counterBody.current.style.background = "#2fb675";
+  const setCounterView = (argumentView: string | undefined) => {
+    if (argumentView) {
+      if (argumentView === "primary") {
+        counterBody.current.style.background = "rgba(255, 255, 255, 0.12)";
         if (counterValue.current) counterValue.current.style.color = "#fff";
       }
 
-      if (view === "secondary") {
-        counterBody.current.style.background = "rgba(131,102,86, 0.12)";
+      if (argumentView === "secondary") {
+        counterBody.current.style.background = "rgba(131, 102, 86, 0.12)";
         if (counterValue.current) counterValue.current.style.color = "#2E2F33";
       }
+
+      return;
+    }
+
+    if (view === "primary") {
+      counterBody.current.style.background = "#2fb675";
+      if (counterValue.current) counterValue.current.style.color = "#fff";
+    }
+
+    if (view === "secondary") {
+      counterBody.current.style.background = "rgba(131,102,86, 0.12)";
+      if (counterValue.current) counterValue.current.style.color = "#2E2F33";
     }
   };
 

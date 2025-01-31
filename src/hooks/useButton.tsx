@@ -18,30 +18,30 @@ export const useButton = ({ size, view }: CounterProps) => {
     }
   };
 
-  const setButtonView = () => {
-    if (view) {
-      if (view === "primary") {
-        Object.assign(buttonRef.current.style, {
-          background: "rgb(255, 119, 0)",
-          color: `#fff`,
-        });
+  const setButtonView = (argumentView: any) => {
+    view = argumentView ? argumentView : view;
 
-        // buttonRef.current.style.setProperty(
-        //   "--buttonHoverBgColor",
-        //   "rgba(255, 255, 255, 0.12)"
-        // );
-      }
+    if (view === "primary") {
+      Object.assign(buttonRef.current.style, {
+        background: "rgb(255, 119, 0)",
+        color: `#fff`,
+      });
 
-      if (view === "secondary") {
-        Object.assign(buttonRef.current.style, {
-          background: "rgba(131,102,86,.12)",
-          color: `rgb(46, 47, 51)`,
-        });
-        buttonRef.current.style.setProperty(
-          "--buttonHoverBgColor",
-          "rgba(46, 47, 51, 0.12)"
-        );
-      }
+      // buttonRef.current.style.setProperty(
+      //   "--buttonHoverBgColor",
+      //   "rgba(255, 255, 255, 0.12)"
+      // );
+    }
+
+    if (view === "secondary") {
+      Object.assign(buttonRef.current.style, {
+        background: "rgba(131,102,86,.12)",
+        color: `rgb(46, 47, 51)`,
+      });
+      buttonRef.current.style.setProperty(
+        "--buttonHoverBgColor",
+        "rgba(46, 47, 51, 0.12)"
+      );
     }
   };
 

@@ -5,6 +5,7 @@ import { useCounter } from "../../hooks/useCounter";
 import { CounterProps } from "./types";
 
 import "./styles.scss";
+import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
 
 export const Counter = forwardRef<HTMLDivElement, CounterProps>(
   ({
@@ -14,6 +15,11 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
     stroke = false,
     pulse = false,
   }) => {
+    const context = useButtonWithCounterContext();
+
+    console.log(context);
+    
+
     const {
       counterBody,
       counterValue,
@@ -28,7 +34,7 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
     useEffect(() => {
       if (counterBody.current) {
         setCounterSize();
-        setCounterView();
+        setCounterView(context?.view);
         setCounterStroke();
         setCounterAnimation();
       }

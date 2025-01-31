@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Loader } from "../Loader";
 
@@ -18,6 +18,11 @@ export const Button: React.FC<ButtonProps> = ({
   focused = false,
   children,
 }) => {
+  const context = useButtonWithCounterContext();
+  const [isLoading, setIsloading] = useState(
+    context?.isLoading ? context?.isLoading : false
+  );
+
   const {
     buttonRef,
     buttonContentRef,
@@ -26,14 +31,12 @@ export const Button: React.FC<ButtonProps> = ({
     setFocused,
   } = useButton({ size, view });
 
-  const { isLoading, setIsloading } = useButtonWithCounterContext();
-
   const loaderRef = useRef<HTMLDivElement>();
 
   useEffect(() => {
     if (buttonRef.current) {
       setButtonSize();
-      setButtonView();
+      setButtonView(context?.view);
       setFocused();
     }
   }, [size, view, focused]);
