@@ -1,12 +1,14 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect } from "react";
 
 import { ReactSVG } from "react-svg";
+
+import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
+
+import { useLoaderStyles } from "../../hooks/useLoaderStyles";
 
 import loaderIcon from "../../assets/loader.svg";
 
 import "./styles.scss";
-import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
-import { useLoaderStyles } from "../../hooks/useLoaderStyles";
 
 type LoaderProps = {
   size?: number;
@@ -17,12 +19,12 @@ type LoaderProps = {
 export const Loader: React.FC<LoaderProps> = forwardRef<
   HTMLDivElement,
   LoaderProps
->(({ size, isLoading }) => {
+>(({ size, isLoading, view }) => {
   const context = useButtonWithCounterContext();
 
   const { loaderRef, setLoaderSize, setLoaderView } = useLoaderStyles({
     size,
-    view: context?.view,
+    view: context?.view ? context.view : view,
   });
 
   useEffect(() => {

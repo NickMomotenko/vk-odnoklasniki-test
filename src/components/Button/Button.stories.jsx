@@ -11,6 +11,14 @@ export default {
 
 const Template = (args) => <Button {...args} />;
 
+const TemplateWithContext = (args) => (
+  <ButtonWithCounter {...args}>
+    <Button>
+      <Counter />
+    </Button>
+  </ButtonWithCounter>
+);
+
 export const ButtonWithSizesAndViews = () => (
   <>
     <div>
@@ -32,14 +40,30 @@ export const ButtonStates = () => (
       <Template size={28} labelText="Disabled" disabled />
       <Template size={36} labelText="Disabled" disabled />
       <Template size={56} labelText="Disabled" disabled />
-    </div>
-    <div>
       <Template size={28} labelText="Disabled" view="secondary" disabled />
       <Template size={36} labelText="Disabled" view="secondary" disabled />
       <Template size={56} labelText="Disabled" view="secondary" disabled />
     </div>
     <div style={{ maxWidth: 200 }}>
-      <Template size={56} labelText="Вроде тут перебор текста" />
+      <Template size={56} labelText="Вроде тут перебор текста" counter={true} />
+      <TemplateWithContext
+        size={56}
+        labelText="Вроде тут перебор текста"
+        counter={true}
+        view="primary"
+      />
+      <Template
+        size={56}
+        labelText="Вроде тут перебор текста"
+        view="secondary"
+        counter={true}
+      />
+      <TemplateWithContext
+        size={56}
+        labelText="Вроде тут перебор текста"
+        counter={true}
+        view="secondary"
+      />
     </div>
     {/* <div>
       <Template size={56} view="secondary" focused />
@@ -55,25 +79,32 @@ export const ButtonStates = () => (
   </>
 );
 
-const TemplateWithContext = (args) => (
-  <ButtonWithCounter {...args}>
-    <Button>
-      <Counter />
-    </Button>
-  </ButtonWithCounter>
-);
-
 export const ButtonWithContextCounter = () => (
   <>
     <div>
       <TemplateWithContext size={56} view="primary" value={5} />
       <TemplateWithContext size={36} view="primary" value={5} />
       <TemplateWithContext size={28} view="primary" value={5} />
-    </div>
-    <div>
-      <TemplateWithContext size={56} view="secondary" value={105} />
+      <TemplateWithContext size={56} view="secondary" value={5} />
       <TemplateWithContext size={36} view="secondary" value={5} />
       <TemplateWithContext size={28} view="secondary" value={5} />
     </div>
+    <div>
+      <TemplateWithContext size={56} view="primary" value={55} />
+      <TemplateWithContext size={36} view="primary" value={55} />
+      <TemplateWithContext size={28} view="primary" value={55} />
+      <TemplateWithContext size={56} view="secondary" value={55} />
+      <TemplateWithContext size={36} view="secondary" value={55} />
+      <TemplateWithContext size={28} view="secondary" value={55} />
+    </div>
+    <div>
+      <TemplateWithContext size={56} view="primary" value={105} />
+      <TemplateWithContext size={36} view="primary" value={105} />
+      <TemplateWithContext size={28} view="primary" value={105} />
+      <TemplateWithContext size={56} view="secondary" value={105} />
+      <TemplateWithContext size={36} view="secondary" value={105} />
+      <TemplateWithContext size={28} view="secondary" value={105} />
+    </div>
+   
   </>
 );

@@ -1,6 +1,7 @@
 import { forwardRef, useEffect } from "react";
 
 import { useCounter } from "../../hooks/useCounter";
+
 import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
 
 import { CounterProps } from "./types";
@@ -21,13 +22,12 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
       counterBody,
       counterValue,
       isCounterValueHidden,
-      isSingleSymbol,
       setCounterSize,
       setCounterView,
       setCounterStroke,
       setCounterAnimation,
     } = useCounter({
-      value: context?.counterValue ? context?.counterValue : value,
+      value: context?.counterValue ?? value,
       size,
       view,
       stroke,
@@ -54,8 +54,7 @@ export const Counter = forwardRef<HTMLDivElement, CounterProps>(
       <div className="counter" ref={counterBody}>
         {!isCounterValueHidden && (
           <span className="counter__value" ref={counterValue}>
-            {isSingleSymbol && renderedValue}
-            {Number(renderedValue) > 99 && "99+"}
+            {Number(renderedValue) > 99 ? "99+" : renderedValue}
           </span>
         )}
       </div>

@@ -96,7 +96,7 @@
     width: calc(100%);
     background: var(--shimmerColor);
 
-    animation: test 1s linear infinite forwards;
+    animation: shimmerAnimation 1s linear infinite forwards;
   }
 
   &:focus-visible {
@@ -115,7 +115,7 @@
   }
 }
 
-@keyframes test {
+@keyframes shimmerAnimation {
   0% {
     transform: translateX(-100%);
   }

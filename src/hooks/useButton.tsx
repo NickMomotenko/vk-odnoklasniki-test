@@ -1,15 +1,14 @@
 import { useRef } from "react";
 
 import { sizes } from "../components/Button/helper";
-import { CounterProps } from "../components/Counter/types";
 
-export const useButton = ({ size, view }: CounterProps) => {
+import { ButtonProps } from "../components/Button/types";
+
+export const useButton = ({ size, view }: ButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement | any>();
   const buttonContentRef = useRef<HTMLDivElement | any>();
 
-  const setButtonSize = ({ buttonSize }: any) => {
-    size = buttonSize ? buttonSize : size;
-
+  const setButtonSize = () => {
     if (sizes[size]) {
       Object.assign(buttonRef.current.style, {
         padding: `${sizes[size]?.verPadding}px ${sizes[size]?.horPadding}px`,
@@ -20,7 +19,7 @@ export const useButton = ({ size, view }: CounterProps) => {
     }
   };
 
-  const setButtonView = (argumentView: any) => {
+  const setButtonView = (argumentView: string | any) => {
     view = argumentView ? argumentView : view;
 
     if (view === "primary") {

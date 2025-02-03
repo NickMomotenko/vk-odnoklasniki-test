@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Loader } from "../Loader";
+
+import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
 
 import { useButton } from "../../hooks/useButton";
 
 import { ButtonProps } from "./types";
 
-import "./styles.scss";
 import { sizes } from "./helper";
-import { useButtonWithCounterContext } from "../../compound/ButtonWithCounter";
+
+import "./styles.scss";
 
 export const Button: React.FC<ButtonProps> = ({
   labelText = "Что делать",
@@ -31,11 +33,11 @@ export const Button: React.FC<ButtonProps> = ({
     setButtonSize,
     setButtonView,
     setFocused,
-  } = useButton({ size, view });
+  } = useButton({ size: context?.size ?? size, view });
 
   useEffect(() => {
     if (buttonRef.current) {
-      setButtonSize({ buttonSize: context?.size });
+      setButtonSize();
       setButtonView(context?.view);
       setFocused();
     }
@@ -50,6 +52,8 @@ export const Button: React.FC<ButtonProps> = ({
   }, [isLoading]);
 
   const handleClick = () => {
+    if (isLoading || disabled) return;
+
     setIsloading(true);
   };
 
@@ -62,7 +66,11 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
     >
       <div className="button__content" ref={buttonContentRef}>
-        {labelText && <span className="button__label">{labelText}</span>}
+        {labelText && (
+          <span className="button__label">
+            {context?.labelText ?? labelText}
+          </span>
+        )}
         {children && counter && (
           <div
             className="button__counter"
@@ -73,7 +81,6 @@ export const Button: React.FC<ButtonProps> = ({
         )}
       </div>
       {isLoading && <div className="button__shimmer"></div>}
-
       <div className="button__loader">
         <Loader
           isLoading={isLoading}
@@ -82,6 +89,7 @@ export const Button: React.FC<ButtonProps> = ({
               ? sizes[context?.size]?.loaderSize
               : sizes[size]?.loaderSize
           }
+          view={view}
         />
       </div>
     </button>

@@ -2,6 +2,7 @@ import { useRef } from "react";
 
 import { sizes } from "../components/Counter/helper";
 import { sizes as buttonSizes } from "../components/Button/helper";
+
 import { CounterProps } from "../components/Counter/types";
 
 export const useCounter = ({
@@ -100,6 +101,5 @@ export const useCounter = ({
     setCounterStroke,
     setCounterAnimation,
     isCounterValueHidden,
-    isSingleSymbol,
   };
 };
